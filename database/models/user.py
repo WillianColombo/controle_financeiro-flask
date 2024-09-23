@@ -1,11 +1,11 @@
 from peewee import Model, CharField
 from database.database import db
 from flask_login import UserMixin
-from main import login_manager
+from extensions import login_manager
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return User.get(int(user_id))
 
 class User(Model, UserMixin):
     name_user = CharField(max_length=80)                                    # Varchar

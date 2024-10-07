@@ -1,0 +1,16 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('home.render_home') }}">Home</a>
+        {% if current_user.is_authenticated %}
+            <div>
+                <a class="btn btn-success">{{ current_user.name_user }}</a>
+                <a href="{{ url_for('user.logout') }}" class="btn btn-danger">Sair</a>
+            </div>
+        {% else %}
+            <div>
+                <a href="{{ url_for('user.register_user') }}" class="btn btn-primary">Cadastre-se</a>
+                <a href="{{ url_for('user.login') }}" class="btn btn-primary">Login</a>
+            </div>
+        {% endif %}
+    </div>
+  </nav>

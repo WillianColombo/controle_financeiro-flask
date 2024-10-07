@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div id="div-form-login" class="container">
+
+
+    <div class="row col-12 col-md-8 col-lg-6 p-2 rounde border shadow">
+            <h3 class="text-start ms-4 h5 mb-3 mt-1">Entrar</h3>
+        <form action="{{ url_for('user.login') }}" method="post" id="login_user_form">
+            {{ form.csrf_token }}
+
+            <div class="col-11 form-floating mb-3 mx-auto">
+                {{ form.email(class='form-control', id="floatingEmail", placeholder="usuario@teste.com") }}
+                {{ form.email.label(for="floatingEmail") }}
+            </div>
+
+            <div class="col-11 form-floating mb-3 mx-auto">
+                {{ form.password(class='form-control', id="floatingPassword", placeholder="Senha123") }}
+                {{ form.password.label(for="floatingPassword") }}
+            </div>
+
+            <div class="input-two-line">
+                {{ form.btn_submit(class='btn btn-primary col-5 mb-3') }}
+                <a href="{{ url_for('home.render_home') }}" class="btn btn-danger col-5 mb-3">Cancelar</a>
+            </div>
+        </form>
+
+        <div id="warning-login" class="mb-3 col-11 col-md-8 col-lg-6 bg-warning text-center mx-auto">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <hr class="mb-3 col-9 mx-auto">
+
+        <p class="text-center mb-0">Ainda não possui login?</p> 
+        <a class="text-center mb-3" href="{{ url_for('user.register_user') }}">Faça seu cadastro!</a>
+    </div>
+
+
+</div>
+
+
+{% endblock %}

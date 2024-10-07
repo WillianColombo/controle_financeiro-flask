@@ -2,33 +2,61 @@
 
 {% block content %}
 
-    <div id="div-form-register" class="container">
+<div id="div-form-register" class="container">
 
-        <div class="row mt-4">
-            <h3>Registre-se</h3>
-        </div>
-
-        <form
-        hx-post="{{ url_for('user.register_user') }}" 
-        id="register_user_form"
-        class="row mt-4 p-4 rounde border shadow"
-        hx-target="#div-form-register">
+    <div class="row col-12 col-md-8 col-lg-6 p-2 rounde border shadow">
+        <h3 class="text-start ms-4 h5 mb-3 mt-1">Cadastrar-se</h3>
+        <form action="{{ url_for('user.register_user') }}" method="post" id="register_user_form">
             {{ form.csrf_token }}
 
-            {{ form.name.label() }}
-            {{ form.name(class='form-control') }}
+            <div class="col-11 form-floating mb-3 mx-auto">
+                {{ form.email(class='form-control', id="floatingEmail", placeholder="usuario@teste.com") }}
+                {{ form.email.label(for="floatingEmail") }}
+            </div>
 
-            {{ form.email.label() }}
-            {{ form.email(class='form-control') }}
+            <div class="col-11 form-floating mb-3 mx-auto">
+                {{ form.name(class='form-control', id="floatingName", placeholder="João") }}
+                {{ form.name.label(for="floatingName") }}
+            </div>
 
-            {{ form.password.label() }}
-            {{ form.password(class='form-control') }}
+            <div class="input-two-line">
+                <div class="col-5 form-floating mb-3">
+                    {{ form.password(class='form-control', id="floatingPassword", placeholder="Senha123") }}
+                    {{ form.password.label(for="floatingPassword") }}
+                </div>
 
-            {{ form.confirm_password.label() }}
-            {{ form.confirm_password(class='form-control') }}
+                <div class="form-floating mb-3 col-5">
+                    {{ form.confirm_password(class='form-control', id="floatingConfirmPassword", placeholder="Senha123")
+                    }}
+                    {{ form.confirm_password.label(for="floatingConfirmPassword") }}
+                </div>
+            </div>
 
-            {{ form.btn_submit(class='btn btn-primary col-12 mt-3') }}
+            <div class="input-two-line">
+                {{ form.btn_submit(class='btn btn-primary col-5 mb-3') }}
+                <a href="{{ url_for('home.render_home') }}" class="btn btn-danger col-5 mb-3">Cancelar</a>
+            </div>
+
         </form>
+
+        <div id="warning-register" class="mb-3 col-12 col-md-10 col-lg-8 bg-warning text-center mx-auto">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <pre class="text-start">{{ message }}</pre class="text">
+                    {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <hr class="mb-3 col-9 mx-auto">
+
+        <p class="text-center mb-0">Já possui cadastro?</p> 
+        <a class="text-center mb-1" href="{{ url_for('user.login') }}">Faça seu login!</a>
     </div>
+
+
+</div>
+
 
 {% endblock %}

@@ -5,11 +5,11 @@ from database.models.user import User
 from extensions import bcrypt
 from peewee import DoesNotExist
 
-class UserForm(FlaskForm):
+class RegisterForm(FlaskForm):
     name = StringField('Nome', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Senha', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirmação da senha', validators=[DataRequired(), EqualTo('password')])
+    confirm_password = PasswordField('Con. a senha', validators=[DataRequired(), EqualTo('password')])
     btn_submit = SubmitField('Cadastrar')
     
     def validate_email(self, email):

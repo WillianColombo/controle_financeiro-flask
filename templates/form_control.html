@@ -1,0 +1,19 @@
+<div class="container">
+
+    <div class="row col-12 col-md-4 col-lg-3 p-2 rounde border shadow">
+            <h3 class="text-start ms-4 h5 mb-3 mt-1">Cadastrar mês de controle</h3>
+        <form action="{{ url_for('move.render_control') }}" method="post">
+            {{ form.csrf_token }}
+
+            <div class="col-11 mb-3 mx-auto">
+                {{ form.month_year(class='form-control') }}
+            </div>
+
+            <div class="input-two-line">
+                {{ form.btn_submit(class='btn btn-primary col-5 mb-3') }}
+                <a href="{{ url_for('home.render_home') }}" class="btn btn-danger col-5 mb-3">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+</div>

@@ -4,6 +4,12 @@ from routes.user import user_route
 from dotenv import load_dotenv
 from database.database import db
 from database.models.user import User
+from database.models.contact import Contact
+from database.models.control import Control
+from database.models.estimate import Estimate
+from database.models.move import Move
+from database.models.type_move import TypeMove
+from database.models.nature import Nature
 import os
 
 def config_all(app):
@@ -18,7 +24,7 @@ def config_env(app):
     
 def configure_db():
     db.connect()
-    db.create_tables([User])
+    db.create_tables([User, Contact, Control, TypeMove, Nature, Estimate, Move])
 
 def config_routes(app):
     app.register_blueprint(home_route)

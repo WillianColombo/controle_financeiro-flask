@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
+from wtforms import SubmitField, DecimalField
 from wtforms.validators import DataRequired, ValidationError
 from database.models.estimate import Estimate
 from database.models.nature import Nature
@@ -8,11 +8,7 @@ from flask_login import current_user
 from peewee import DoesNotExist
 
 class EstimateForm(FlaskForm):
-    choices = (Nature.select(Nature, User))
-    
-    name = StringField('Estimativa', validators=[DataRequired()])
-    natures = SelectField(choices=[()] ,validators=[DataRequired()])
-    btn_submit = SubmitField('Cadastrar')
+    value_nature = DecimalField(validators=[DataRequired()])
     
     def validate_name(self, name):
         try:

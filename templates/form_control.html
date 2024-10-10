@@ -2,7 +2,7 @@
 
     <div class="row col-12 col-md-4 col-lg-3 p-2 rounde border shadow">
             <h3 class="text-start ms-4 h5 mb-3 mt-1">Cadastrar mês de controle</h3>
-        <form action="{{ url_for('move.render_control') }}" method="post">
+        <form action="{{ url_for('control.render_form') }}" method="post">
             {{ form.csrf_token }}
 
             <div class="col-11 mb-3 mx-auto">

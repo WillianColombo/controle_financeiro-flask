@@ -1,43 +1,16 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
+from database.models.nature import Nature
 
 move_route = Blueprint('move', __name__)
 
 '''
-    /move/                      GET - Renderiza os elementos 
-    /move/control/              GET - Renderiza o formulário de cadastro para novo mês de controle
-    /move/control/              POST - Envia o cadastro do formulário para novo mês de controle
+    /move/nature               GET - Renderiza os campos para cadastro de natureza
+    /move/nature               POST - Envia o cadastro do formulário completo para nova natureza
+    /move/natures              GET - Renderiza a lista de naturezas cadastradas, a partir do BD
+    /move/estimate             GET - Renderiza o formulário de cadastro para a estimativa de gasto da natureza em relação ao controle
+    /move/estimate             POST - Envia o cadastro do formulário para a estimativa de gasto da natureza em relação ao controle
 '''
-
-@move_route.route('/')
-def render_index():
-    return render_template('index.html')
-
-@move_route.route('/control', methods=['GET', 'POST'])
-def render_control():
-    if not current_user.is_authenticated:
-        return redirect(url_for('user.login'))
-    from forms.control import ControlForm
-    form = ControlForm()
-    
-    if form.validate_on_submit():
-            form.save()
-            return redirect(url_for('home.render_home'))
-
-    return render_template('form_control.html', form=form)
-
-@move_route.route('/nature', methods=['GET', 'POST'])
-def render_nature():
-    if not current_user.is_authenticated:
-        return redirect(url_for('user.login'))
-    from forms.nature import NatureForm
-    form = NatureForm()
-    
-    if form.validate_on_submit():
-        form.save()
-        return redirect(url_for('home.render_home'))
-
-    return render_template('form_nature.html', form=form)
 
 @move_route.route('/estimate', methods=['GET', 'POST'])
 def render_estimate():

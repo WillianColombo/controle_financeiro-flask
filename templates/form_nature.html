@@ -1,32 +1,44 @@
-{% extends 'index.html' %}
+<div class="modal-header">
+    <h5 class="modal-title">
+        {% if nature %}
+        Editar Natureza
+        {% else %}
+        Cadastrar Natureza
+        {% endif %}
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<form
+    hx-target="#nature-list"
+    hx-swap="outerHTML"
+    {% if nature %}
+        hx-put="{{ url_for('nature.update_nature', id_nature=nature.id) }}"
+    {% else %}
+        hx-post="{{ url_for('nature.render_form') }}"
+    {% endif %}>
+    {{ form.csrf_token }}
 
-{% block content %}
+    {% if nature %}
+    {{form.id(value=nature.id)}}
+    {% endif %}
 
-<div class="container">
-
-    <div class="row col-12 col-md-4 col-lg-3 p-2 rounde border shadow">
-            <h3 class="text-start ms-4 h5 mb-3 mt-1">Cadastrar mês de controle</h3>
-        <form action="{{ url_for('move.render_nature') }}" method="post">
-            {{ form.csrf_token }}
-
-            <div class="col-11 form-floating mb-3 mx-auto">
-                {{ form.name(class='form-control', id="floatingNature", placeholder="Manutenção") }}
-                {{ form.name.label(for="floatingNature") }}
-            </div>
-
-            <div class="col-11 form-floating mb-3 mx-auto">
-                {{ form.description(class='form-control', id="floatingDescription", placeholder="usuario@teste.com") }}
-                {{ form.description.label(for="floatingDescription") }}
-            </div>
-
-            <div class="input-two-line">
-                {{ form.btn_submit(class='btn btn-primary col-5 mb-3') }}
-                <a href="{{ url_for('home.render_home') }}" class="btn btn-danger col-5 mb-3">Cancelar</a>
-            </div>
-        </form>
+    <div class="col-11 form-floating mb-3 mx-auto">
+        {{ form.name(class='form-control', id="floatingNature", placeholder="Manutenção", value=nature.name_nature if nature else '') }}
+        {{ form.name.label(for="floatingNature") }}
     </div>
 
-</div>
-
-
-{% endblock %}
+    <div class="col-11 form-floating mb-3 mx-auto">
+        {{ form.description(class='form-control', id="floatingDescription", placeholder="Descrição de teste", value=nature.description_nature if nature else '') }}
+        {{ form.description.label(for="floatingDescription") }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            {% if nature %}
+                Salvar
+            {% else %}    
+                Cadastrar
+            {% endif %}
+        </button>
+    </div>
+</form>

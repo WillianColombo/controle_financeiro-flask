@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row col-12 col-md-4 col-lg-3 p-2 rounde border shadow">
+        <h3 class="text-start ms-4 h5 mb-3 mt-1">Estimar gastos para </h3>
+        <form action="{{ url_for('move.render_estimate') }}" method="post">
+            {{ form.csrf_token }}
+
+            <div class="col-11 form-floating mb-3 mx-auto">
+                {{ form.value_nature(class='form-control', id="floatingDescription", placeholder="R$ 450.00") }}
+            </div>
+
+            <div class="input-two-line">
+                <button type="submit" class="btn btn-primary col-5 mb-3">Cadastrar</button>
+                <a href="{{ url_for('home.render_home') }}" class="btn btn-danger col-5 mb-3">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}

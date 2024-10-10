@@ -1,6 +1,8 @@
 from routes.home import home_route
 from routes.move import move_route
 from routes.user import user_route
+from routes.control import control_route
+from routes.nature import nature_route
 from dotenv import load_dotenv
 from database.database import db
 from database.models.user import User
@@ -30,6 +32,8 @@ def config_routes(app):
     app.register_blueprint(home_route)
     app.register_blueprint(move_route, url_prefix='/move')
     app.register_blueprint(user_route, url_prefix='/user')
+    app.register_blueprint(control_route, url_prefix='/control')
+    app.register_blueprint(nature_route, url_prefix='/nature')
     
 def config_login(app):
     from extensions import login_manager

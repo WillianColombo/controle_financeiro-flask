@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h5 class="modal-title">Deletar contato</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="mt-3 mb-3">
+    Deseja excluir permanentemente o contato {{ contact.name }}?
+</div>
+
+<div class="modal-footer">
+    <button 
+        class="btn btn-danger"
+        hx-delete="{{ url_for('contact.delete_contact', id_contact=contact.id) }}"
+        hx-target="#contact-list"
+        hx-swap="outerHTML"
+        data-bs-dismiss="modal">
+        Excluir
+    </button>
+    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+</div>

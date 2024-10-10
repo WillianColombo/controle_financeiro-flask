@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h5 class="modal-title">
+        {% if contact %}
+        Editar Contato
+        {% else %}
+        Cadastrar Contato
+        {% endif %}
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<form
+    hx-target="#contact-list"
+    hx-swap="outerHTML"
+    {% if contact %}
+        hx-put="{{ url_for('contact.update_contact', id_contact=contact.id) }}"
+    {% else %}
+        hx-post="{{ url_for('contact.render_form') }}"
+    {% endif %}>
+    {{ form.csrf_token }}
+
+    {% if contact %}
+    {{form.id(value=contact.id)}}
+    {% endif %}
+
+    <div class="col-11 form-floating mb-3 mx-auto">
+        {{ form.name(class='form-control mt-3', id="floatingContact", placeholder="João Silva", value=contact.name_contact if contact else '') }}
+        {{ form.name.label(for="floatingContact") }}
+    </div>
+
+    <div class="col-11 form-floating mb-3 mx-auto">
+        {{ form.description(class='form-control', id="floatingDescription", placeholder="Descrição de teste", value=contact.description_contact if contact else '') }}
+        {{ form.description.label(for="floatingDescription") }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            {% if contact %}
+                Salvar
+            {% else %}    
+                Cadastrar
+            {% endif %}
+        </button>
+    </div>
+</form>

@@ -7,7 +7,7 @@
     <div class="row col-12 col-md-4 col-lg-4 p-2 rounde border shadow">
         <h3 class="text-start ms-4 h5 mb-3 mt-1">Lista de Naturezas</h3>
         {% for form in forms %}
-        <form action="{{ url_for('move.render_estimate') }}" method="post">
+        <form action="{{ url_for('estimate.render_estimate') }}" method="post">
             <div class="col-11 form-floating mb-3 mx-auto" style="display: flex;justify-content: space-around;align-items: center;">
                 {{ form.value_nature(class='form-control me-2', id="floatingNature-{{ nature.id }}", placeholder="450.50") }}
                 {{ form.value_nature.label(for="floatingNature-{{ nature.id }}") }}
@@ -17,7 +17,7 @@
         </form>
         {% endfor %}
         <a 
-            hx-get="{{ url_for('move.render_natures') }}" 
+            hx-get="{{ url_for('nature.list_natures') }}" 
             class="btn btn-primary col-6 mx-auto"
             data-bs-toggle="modal" 
             

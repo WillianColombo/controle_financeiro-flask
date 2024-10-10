@@ -6,14 +6,14 @@ from database.models.user import User
 nature_route = Blueprint('nature', __name__)
 
 '''
-    - /nature/                 (GET) Renderizar um formulário para criar um naturee
-    - /nature/                 (POST) Insere um naturee
-    - /nature/all              (GET) Listar os naturees
-    - /nature/<id>             (GET) Obter os dados de um naturee   
-    - /nature/<id>/edit        (GET) Renderizar um formulário para editar um naturee
-    - /nature/<id>/update      (PUT) Atualizar os dados de um naturee
-    - /nature/<id>/warning     (GET) Renderizar um formulário para editar um naturee
-    - /nature/<id>/delete      (DELETE) Deleta o registro do naturee  
+    - /nature/                 (GET) Renderizar um formulário para criar um nature
+    - /nature/                 (POST) Insere um nature
+    - /nature/all              (GET) Listar os natures
+    - /nature/<id>             (GET) Obter os dados de um nature   
+    - /nature/<id>/edit        (GET) Renderizar um formulário para editar um nature
+    - /nature/<id>/update      (PUT) Atualizar os dados de um nature
+    - /nature/<id>/warning     (GET) Renderizar um formulário para editar um nature
+    - /nature/<id>/delete      (DELETE) Deleta o registro do nature  
 '''
 
 @nature_route.route('/', methods=['GET', 'POST'])

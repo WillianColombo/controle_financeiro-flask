@@ -33,6 +33,5 @@ class NatureForm(FlaskForm):
                 Nature.description_nature: self.description.data
                 }
             ).where(Nature.id_user == current_user).where(Nature.id == self.id.data))
-        print(natures)
         natures.execute()
             

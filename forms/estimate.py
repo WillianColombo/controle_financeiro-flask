@@ -1,27 +1,19 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, DecimalField
-from wtforms.validators import DataRequired, ValidationError
+from wtforms import DecimalField, HiddenField, SubmitField
+from wtforms.validators import DataRequired
 from database.models.estimate import Estimate
-from database.models.nature import Nature
-from database.models.user import User
 from flask_login import current_user
-from peewee import DoesNotExist
 
 class EstimateForm(FlaskForm):
-    value_nature = DecimalField(validators=[DataRequired()])
+    id_estimate = HiddenField()
+    id_nature = HiddenField()
+    value_nature = DecimalField(validators=[DataRequired()])    
     
-    def validate_name(self, name):
-        try:
-            nature = Estimate.get(Estimate.name_nature == name.data)
-            raise ValidationError('nature already registered')
-        except DoesNotExist:
-            pass
-
-    def save(self):
-        nature = Estimate.create(
-            name_nature = self.name.data,
-            description_nature = self.description.data,
-            id_user = current_user,
-        )
-        return nature
-            
+    def save(self, id_control, id_nature):
+        estimate = Estimate.create(value_estimate=self.value_nature.data, id_control=id_control, id_nature=id_nature)
+    
+    def edit_save(self):
+        estimates = (Estimate.update(
+            {Estimate.value_estimate: self.value_nature.data}).where(
+                Estimate.id == self.id_estimate.data)).execute()
+        return estimates

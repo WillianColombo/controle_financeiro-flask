@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-2" id="estimate-list">
+
+    <div class="row col-12 col-md-4 col-lg-4 p-2 rounde border shadow">
+        <h3 class="text-start ms-4 h5 mb-3 mt-1">Estimativas</h3>
+        <ul class="list-group">
+            {% for estimate in estimates %}
+            <li class="list-group-item">
+                <div class="col-11 form-floating mx-auto"
+                    style="display: flex;justify-content: space-between;align-items: center;">
+                    <span>{{ estimate['name_nature'] }}</span>
+                    <span>R$ {{ estimate['value_estimate'] }} </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="input-two-line mt-3">
+            <a hx-get="{{ url_for('estimate.import_estimates', id_control=id_control) }}" class="btn btn-primary col-5"
+                hx-target="#modal-content" data-bs-toggle="modal" data-bs-target="#estimate-modal">
+                Importar
+            </a>
+            <a hx-get="{{ url_for('estimate.adjust_estimate', id_control=id_control ) }}" class="btn btn-primary col-5"
+                hx-target="#modal-content" data-bs-toggle="modal" data-bs-target="#estimate-modal">
+                Ajustar
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="estimate-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body" id="modal-content"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h5 class="modal-title">Importar estimativas</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="mt-3 mb-3">
+    <p>Importar as estimativas substituirá as atuais!</p>
+    <ul class="list-group">
+        {% for control in controls %}
+        <li class="list-group-item">
+            <div class="col-11 form-floating mx-auto"
+                style="display: flex;justify-content: space-between;align-items: center;">
+                <span>{{ control.month_control }} - {{ control.year_control }}</span>
+                <a 
+                    hx-get="{{ url_for('estimate.import_estimate_save', id_control=id_control, id_new_control=control.id) }}"
+                    hx-target="#estimate-list" hx-swap="outerHTML"
+                    data-bs-toggle="modal" data-bs-target="#estimate-modal" 
+                    class="btn btn-primary bi bi-check">
+                </a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+</div>

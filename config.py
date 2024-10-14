@@ -4,6 +4,7 @@ from routes.user import user_route
 from routes.control import control_route
 from routes.nature import nature_route
 from routes.contact import contact_route
+from routes.estimate import estimate_route
 from dotenv import load_dotenv
 from database.database import db
 from database.models.user import User
@@ -21,6 +22,9 @@ def config_all(app):
     config_login(app)
     configure_db()
     
+    from database.seeding import seeding
+    seeding()
+    
 def config_env(app):
     load_dotenv()
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -36,6 +40,7 @@ def config_routes(app):
     app.register_blueprint(control_route, url_prefix='/control')
     app.register_blueprint(nature_route, url_prefix='/nature')
     app.register_blueprint(contact_route, url_prefix='/contact')
+    app.register_blueprint(estimate_route, url_prefix='/control/<int:id_control>/estimate')
     
 def config_login(app):
     from extensions import login_manager
